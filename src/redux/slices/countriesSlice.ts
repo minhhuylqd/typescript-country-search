@@ -31,6 +31,7 @@ const initialState: CountryState = {
   status: 'idle'
 }
 
+
 // REGION -- Thunk function
 export const fetchAllCountries = createAsyncThunk('countries/fetchAllCountries', async () => {
   try {
@@ -46,6 +47,7 @@ export const fetchAllCountries = createAsyncThunk('countries/fetchAllCountries',
   }
 })
 // ENDREGION -- Thunk function
+
 
 // REGION -- CountriesSlices
 const countriesSlice = createSlice({

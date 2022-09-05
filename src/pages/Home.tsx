@@ -19,9 +19,9 @@ export default function Home() {
   }
 
   return (
-    <>
+    <div className='relative bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100'>
       <Navbar />
       <Table />
-    </>
+    </div>
   )
 }
