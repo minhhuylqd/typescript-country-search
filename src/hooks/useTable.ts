@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
 const calculateRange = (data: string[], rowsPerPage: number) => {
   const range = []
@@ -7,7 +7,7 @@ const calculateRange = (data: string[], rowsPerPage: number) => {
   for (let i = 1; i <= num; i++) {
     range.push(i)
   }
-  
+
   return range
 }
 
@@ -25,10 +25,9 @@ const useTable = (data: string[], page: number, rowsPerPage: number) => {
 
     const slice = sliceData(data, page, rowsPerPage)
     setSlice([...slice])
-
   }, [data, setTableRange, page, rowsPerPage, setSlice])
 
-  return {slice, range: tableRange}
+  return { slice, range: tableRange }
 }
 
 export default useTable

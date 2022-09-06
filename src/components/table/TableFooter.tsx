@@ -1,20 +1,20 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
 
-import styles from "./TableFooter.module.css";
+import styles from './TableFooter.module.css'
 
 type Footer = {
-  range: number[],
-  slice: string[],
-  page: number,
+  range: number[]
+  slice: string[]
+  page: number
   setPage: Dispatch<SetStateAction<number>>
 }
 
 const TableFooter = ({ range, setPage, page, slice }: Footer) => {
   useEffect(() => {
     if (slice.length < 1 && page !== 1) {
-      setPage(page - 1);
+      setPage(page - 1)
     }
-  }, [slice, page, setPage]);
+  }, [slice, page, setPage])
   return (
     <div className={`${styles.tableFooter} bg-[#f1f1f1] dark:bg-gray-800`}>
       {range.map((el, index) => (
@@ -29,7 +29,7 @@ const TableFooter = ({ range, setPage, page, slice }: Footer) => {
         </button>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default TableFooter;
+export default TableFooter

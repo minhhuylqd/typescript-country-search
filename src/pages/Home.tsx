@@ -7,8 +7,9 @@ import FilterBar from '../components/filterbar'
 import Table from '../components/table'
 
 export default function Home() {
-
-  const loadingStatus = useSelector((state:RootState) => state.countries.status)
+  const loadingStatus = useSelector(
+    (state: RootState) => state.countries.status
+  )
 
   if (loadingStatus === 'loading') {
     return (
@@ -20,7 +21,7 @@ export default function Home() {
   }
 
   return (
-    <div className='w-full min-h-screen relative bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100'>
+    <div className="w-full min-h-screen relative bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100">
       <Navbar />
       <FilterBar />
       <Table />

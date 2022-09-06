@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
-import { RootState } from "../store";
+import { RootState } from '../store'
 
 export interface CartState {
   countryItems: string[]
 }
 
 const initialState: CartState = {
-  countryItems: []
+  countryItems: [],
 }
 
 // REGION -- CartSlice
@@ -22,19 +22,21 @@ const cartSlice = createSlice({
       }
     },
     removeItem(state: CartState, action) {
-      state.countryItems = state.countryItems.filter((item) => item !== action.payload)
+      state.countryItems = state.countryItems.filter(
+        (item) => item !== action.payload
+      )
     },
     clearAll(state: CartState, action) {
       state.countryItems = []
-    }
-  }
+    },
+  },
 })
 
-export const {addItem, removeItem, clearAll} = cartSlice.actions
+export const { addItem, removeItem, clearAll } = cartSlice.actions
 
 export default cartSlice.reducer
 // ENDREGION -- CartSlice
 
 // REGION -- Selectors
-export const fetchCountryItems = (state:RootState) => state.cart.countryItems
+export const fetchCountryItems = (state: RootState) => state.cart.countryItems
 // ENDREGION -- Selectors

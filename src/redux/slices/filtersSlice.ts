@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { RootState } from './../store';
+import { RootState } from './../store'
 
 export interface FiltersState {
   searchQuery: string
@@ -12,8 +12,8 @@ export interface FiltersState {
 const initialState: FiltersState = {
   searchQuery: '',
   filterOptions: {
-    byRegion: []
-  }
+    byRegion: [],
+  },
 }
 
 // REGION -- FiltersSlice
@@ -21,13 +21,16 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    updateSearch(state:FiltersState, action) {
+    updateSearch(state: FiltersState, action) {
       state.searchQuery = action.payload
     },
     updateRegionFilter: {
-      reducer(state: FiltersState, action: PayloadAction<{region: string, changeType: string}>) {
-        let {region, changeType} = action.payload
-        const {byRegion} = state.filterOptions
+      reducer(
+        state: FiltersState,
+        action: PayloadAction<{ region: string; changeType: string }>
+      ) {
+        let { region, changeType } = action.payload
+        const { byRegion } = state.filterOptions
         switch (changeType) {
           case 'add': {
             if (!byRegion.includes(region)) {
@@ -36,7 +39,9 @@ const filtersSlice = createSlice({
             break
           }
           case 'remove': {
-            state.filterOptions.byRegion = byRegion.filter((existedRegion: string) => existedRegion !== region)
+            state.filterOptions.byRegion = byRegion.filter(
+              (existedRegion: string) => existedRegion !== region
+            )
             break
           }
           default:
@@ -44,23 +49,21 @@ const filtersSlice = createSlice({
         }
       },
       prepare(region: string, changeType: string) {
-        return {payload: {region, changeType}}
-      }
-    }
-  }
+        return { payload: { region, changeType } }
+      },
+    },
+  },
 })
 
-export const {
-  updateSearch,
-  updateRegionFilter
-} = filtersSlice.actions
+export const { updateSearch, updateRegionFilter } = filtersSlice.actions
 
 export default filtersSlice.reducer
 // ENDREGION -- FiltersSlice
 
-
 // REGION -- Selectors
-export const selectSelectedRegions = (state: RootState) => state.filters.filterOptions.byRegion.map(
-  (region: string) => ( {name: region, id: region} )
-)
+export const selectSelectedRegions = (state: RootState) =>
+  state.filters.filterOptions.byRegion.map((region: string) => ({
+    name: region,
+    id: region,
+  }))
 // ENDREGION -- Selectors
