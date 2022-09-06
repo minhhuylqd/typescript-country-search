@@ -24,7 +24,7 @@ export default function CartContent() {
 
   const clearAllElement = (
     <div 
-      className="p-1 flex items-center gap-2 hover:border-b border-gray-900 dark:border-gray-300"
+      className="p-1.5 m-2 flex items-center gap-2 hover:bg-red-500 dark:hover:bg-red-700 rounded-md"
       style={{cursor: 'pointer'}}
       onClick={handleClearAll}
     >
