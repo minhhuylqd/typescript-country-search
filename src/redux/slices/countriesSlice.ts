@@ -88,6 +88,38 @@ export const selectAllCountryIds = createSelector(
   (countries: CountryEntities) => Object.values(countries).map((country: Country) => country.cca3)
 )
 
+export const selectFilteredCountries = createSelector(
+  selectAllCountries,
+
+  (state: RootState) => state.filters,
+
+  (countriesState, filtersState) => {
+    const {searchQuery, filter} = filtersState
+    const {byRegion} = filter
+
+    let filteredCountries = Object.values(countriesState.entities)
+
+    if (searchQuery !== '') {
+      filteredCountries = filteredCountries.filter((country:Country) => {
+        return country.name.official.toLowerCase().includes(searchQuery.toLowerCase())
+      })
+    }
+
+    if (byRegion.length > 0) {
+      filteredCountries = filteredCountries.filter((country: Country) => {
+        return byRegion.includes(country.region)
+      })
+    }
+
+    return filteredCountries
+  }
+)
+
+export const selectFilteredCountryIds = createSelector(
+  selectFilteredCountries,
+  (filteredCountries) => filteredCountries.map((country:Country) => country.cca3)
+)
+
 export type CountryIds = string[]
 
 export const selectCountryById = (state:RootState, countryId: string) => selectCountryEntities(state)[countryId]

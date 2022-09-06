@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { RootState } from '../redux/store'
 import Navbar from '../components/navbar'
+import FilterBar from '../components/filterbar'
 import Table from '../components/table'
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     <div className='relative bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100'>
       <Navbar />
+      <FilterBar />
       <Table />
     </div>
   )

@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { selectAllCountryIds } from "../../redux/slices/countriesSlice";
+import { selectAllCountryIds, selectFilteredCountryIds } from "../../redux/slices/countriesSlice";
 import TableItems from "./TableItems";
 
 
 export default function Table() {
 
-  const countryIds = useSelector(selectAllCountryIds)
+  const countryIds = useSelector(selectFilteredCountryIds)
 
   const renderedItems = countryIds.map((countryId:string) => {
     return <TableItems key={countryId} id={countryId} />
