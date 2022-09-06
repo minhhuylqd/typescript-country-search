@@ -3,14 +3,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface FiltersState {
   searchQuery: string
-  filter: {
+  filterOptions: {
     byRegion: string[]
   }
 }
 
 const initialState: FiltersState = {
   searchQuery: '',
-  filter: {
+  filterOptions: {
     byRegion: []
   }
 }
@@ -26,7 +26,7 @@ const filtersSlice = createSlice({
     updateRegionFilter: {
       reducer(state: FiltersState, action: PayloadAction<{region: string, changeType: string}>) {
         let {region, changeType} = action.payload
-        const {byRegion} = state.filter
+        const {byRegion} = state.filterOptions
         switch (changeType) {
           case 'add': {
             if (!byRegion.includes(region)) {
@@ -35,7 +35,7 @@ const filtersSlice = createSlice({
             break
           }
           case 'remove': {
-            state.filter.byRegion = byRegion.filter((existedRegion: string) => existedRegion !== region)
+            state.filterOptions.byRegion = byRegion.filter((existedRegion: string) => existedRegion !== region)
             break
           }
           default:
@@ -59,7 +59,7 @@ export default filtersSlice.reducer
 
 
 // REGION -- Selectors
-export const selectSelectedRegions = (state: RootState) => state.filters.filter.byRegion.map(
+export const selectSelectedRegions = (state: RootState) => state.filters.filterOptions.byRegion.map(
   (region: string) => ( {name: region, id: region} )
 )
 // ENDREGION -- Selectors

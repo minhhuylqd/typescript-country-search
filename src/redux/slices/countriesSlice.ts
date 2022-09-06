@@ -94,8 +94,8 @@ export const selectFilteredCountries = createSelector(
   (state: RootState) => state.filters,
 
   (countriesState, filtersState) => {
-    const {searchQuery, filter} = filtersState
-    const {byRegion} = filter
+    const {searchQuery, filterOptions} = filtersState
+    const {byRegion} = filterOptions
 
     let filteredCountries = Object.values(countriesState.entities)
 

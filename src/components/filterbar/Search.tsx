@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import {updateSearch} from "../../redux/slices/filtersSlice"
@@ -13,15 +13,9 @@ export default function Search() {
     setInput(event.target.value)
   }
 
-  const handleEnterKeySubmit = (event: React.KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Enter') {
-      handleSubmitSearch()
-    }
-  }
-
-  const handleSubmitSearch = () => {
+  useEffect(() => {
     dispatch(updateSearch(input))
-  }
+  }, [input, dispatch])
 
   return (
     <div className="relative w-full max-w-[500px]">
@@ -34,14 +28,13 @@ export default function Search() {
           placeholder="Search Country..." 
           value={input}
           onChange={handleInputChange}
-          onKeyDown={handleEnterKeySubmit}
         />
-        <button 
+        {/* <button 
           className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           onClick={handleSubmitSearch}
         >
           Search
-        </button>
+        </button> */}
     </div>
   )
 }
