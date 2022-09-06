@@ -23,11 +23,14 @@ const cartSlice = createSlice({
     },
     removeItem(state: CartState, action) {
       state.countryItems = state.countryItems.filter((item) => item !== action.payload)
+    },
+    clearAll(state: CartState, action) {
+      state.countryItems = []
     }
   }
 })
 
-export const {addItem, removeItem} = cartSlice.actions
+export const {addItem, removeItem, clearAll} = cartSlice.actions
 
 export default cartSlice.reducer
 // ENDREGION -- CartSlice
