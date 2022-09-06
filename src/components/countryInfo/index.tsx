@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
 import { IconContext } from "react-icons";
 import {BsCartPlusFill} from 'react-icons/bs'
 import {MdRemoveShoppingCart} from 'react-icons/md'
@@ -10,11 +9,11 @@ import { selectCountryById } from "../../redux/slices/countriesSlice";
 import { selectDarkmode } from "../../redux/slices/appearanceSlice";
 import { addItem, removeItem, fetchCountryItems } from "../../redux/slices/cartSlice";
 
-type Item = {
+type Country = {
   id: string
 }
 
-export default function TableItems({id}: Item) {
+export default function CountryInfo({id}: Country) {
 
   const dispatch = useDispatch()
 
@@ -22,8 +21,12 @@ export default function TableItems({id}: Item) {
   const isDarkmode = useSelector(selectDarkmode)
 
   const flag = country.flags.png
-  const name = country.name.common
+  const commonName = country.name.common
+  const officialName = country.name.official
+  const capital = country.capital.map((capital) => <span>{capital} </span>)
   const region = country.region
+  const subregion = country.subregion
+  const languages = Object.values(country.languages).map((language) => <li>- {language}</li>)
   const population = country.population
 
   const countryItems = useSelector(fetchCountryItems)
@@ -33,7 +36,7 @@ export default function TableItems({id}: Item) {
   const addItemElement = (
     <div
       onClick={dispatchAddItem}
-      className="p-3 hover:bg-green-500 dark:hover:bg-green-700 rounded-md"
+      className="flex gap-2 p-2 m-2 rounded-md hover:bg-green-500 dark:hover:bg-green-700 "
       style={{cursor: 'pointer'}}
     >
       <IconContext.Provider value={{
@@ -42,12 +45,14 @@ export default function TableItems({id}: Item) {
       }}>
         <BsCartPlusFill />
       </IconContext.Provider>
+      <p>Add to Cart</p>
     </div>
   )
+
   const removeItemElement = (
     <div
       onClick={dispatchRemoveItem}
-      className="p-3 hover:bg-red-500 dark:hover:bg-red-700 rounded-md"
+      className="flex gap-2 p-2 m-2 rounded-md hover:bg-red-500 dark:hover:bg-red-700 "
       style={{cursor: 'pointer'}}
     >
       <IconContext.Provider value={{
@@ -56,37 +61,33 @@ export default function TableItems({id}: Item) {
       }}>
         <MdRemoveShoppingCart />
       </IconContext.Provider>
+      <p>Remove from Cart</p>
     </div>
   )
 
   return (
-    <tr className="border-b dark:border-gray-600 bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600">
-      <td className="py-2 px-4 border-r dark:border-gray-600">
-        <img src={flag} alt="Country Flag" className="max-w-[100px]" />
-      </td>
-      <td className="py-2 px-4 border-r dark:border-gray-600">
-        {name}
-      </td>
-      <td className="py-2 px-4 border-r dark:border-gray-600">
-        {region}
-      </td>
-      <td className="py-2 px-4 border-r dark:border-gray-600">
-        {population}
-      </td>
-      <td className="text-center py-2 px-4 border-r dark:border-gray-600">
-        <Link
-          to={`/country/${id}`}
-        >
-          <span className="text-sm italic hover:text-sky-400">Read More</span>
-        </Link>
-      </td>
-      <td className="text-center py-2 px-4">
+    <div className="w-full h-full p-8 flex flex-col md:flex-row gap-4">
+      {/* Graphic info */}
+      <div className="p-8 w-full md:w-[30%] flex flex-col items-center">
+        <img src={flag} alt="Country Flag" className="max-w-[250px] py-2" />
+        <h2 className="italic">{officialName}</h2>
         {
           !countryItems.includes(id)
            ? addItemElement
            : removeItemElement
         }
-      </td>
-    </tr>
+      </div>
+      {/* Detail info */}
+      <div className="p-8 w-full md:w-[70%] flex flex-col gap-2 md:border-l dark:border-gray-600">
+        <h2 className="text-center uppercase font-semibold text-xl">{officialName}</h2>
+        <p>Common Name: {commonName}</p>
+        <p>Capital: {capital}</p>
+        <p>Region: {region}</p>
+        <p>Subregion: {subregion}</p>
+        <label htmlFor="languages-list">Languages: </label>
+        <ul id="languages-list">{languages}</ul>
+        <p>Population: {population}</p>
+      </div>
+    </div>
   )
 }

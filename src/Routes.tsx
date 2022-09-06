@@ -2,7 +2,8 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
-import Product from './pages/Product'
+import Cart from './pages/Cart'
+import Country from './pages/Country'
 
 const Routes = () => (
   <Switch>
@@ -13,8 +14,13 @@ const Routes = () => (
     />
     <Route
       exact
-      path='/products'
-      component={ Product }
+      path='/cart'
+      component={ Cart }
+    />
+    <Route
+      exact
+      path='/country/:countryId'
+      component={ Country }
     />
   </Switch>
 )
