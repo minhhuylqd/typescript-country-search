@@ -4,7 +4,7 @@ import { IconContext } from 'react-icons'
 import { FaTimes } from 'react-icons/fa'
 
 import CartItems from './CartItems'
-import { fetchCountryItems } from '../../redux/slices/cartSlice'
+import { clearAll, fetchCountryItems } from '../../redux/slices/cartSlice'
 import { selectDarkmode } from '../../redux/slices/appearanceSlice'
 
 export default function CartContent() {
@@ -18,10 +18,10 @@ export default function CartContent() {
     return <CartItems id={item} key={item} />
   })
 
-  const handleClearAll = () => dispatch({ type: 'cart/clearAll' })
+  const handleClearAll = () => dispatch(clearAll())
 
   const clearAllElement = (
-    <div
+    <button
       className="p-1.5 m-2 flex items-center gap-2 hover:bg-red-500 dark:hover:bg-red-700 rounded-md"
       style={{ cursor: 'pointer' }}
       onClick={handleClearAll}
@@ -34,7 +34,7 @@ export default function CartContent() {
         <FaTimes />
       </IconContext.Provider>
       <p className="italic">Clear all</p>
-    </div>
+    </button>
   )
 
   return (

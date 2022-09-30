@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { IconContext } from 'react-icons'
+import { FaTimes } from 'react-icons/fa'
 
 import { updateSearch } from '../../redux/slices/filtersSlice'
+import { selectDarkmode } from '../../redux/slices/appearanceSlice'
 
 export default function Search() {
   const dispatch = useDispatch()
@@ -15,6 +18,22 @@ export default function Search() {
   useEffect(() => {
     dispatch(updateSearch(input))
   }, [input, dispatch])
+
+  const isDarkmode = useSelector(selectDarkmode)
+
+  const clearSearch = () => setInput('')
+
+  const clearSearchButton = (
+    <button className="absolute inset-y-0 right-0 p-4" onClick={clearSearch}>
+      <IconContext.Provider
+        value={{
+          color: `${isDarkmode ? '#9ca3af' : '#6b7280'}`,
+        }}
+      >
+        <FaTimes />
+      </IconContext.Provider>
+    </button>
+  )
 
   return (
     <div className="relative w-full max-w-[500px]">
@@ -42,12 +61,7 @@ export default function Search() {
         value={input}
         onChange={handleInputChange}
       />
-      {/* <button 
-          className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          onClick={handleSubmitSearch}
-        >
-          Search
-        </button> */}
+      {input !== '' && clearSearchButton}
     </div>
   )
 }

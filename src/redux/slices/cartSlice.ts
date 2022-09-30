@@ -26,7 +26,7 @@ const cartSlice = createSlice({
         (item) => item !== action.payload
       )
     },
-    clearAll(state: CartState, action) {
+    clearAll(state: CartState) {
       state.countryItems = []
     },
   },

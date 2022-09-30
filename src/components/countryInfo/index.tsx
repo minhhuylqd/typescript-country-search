@@ -41,7 +41,7 @@ export default function CountryInfo({ id }: Country) {
   const dispatchRemoveItem = () => dispatch(removeItem(id))
 
   const addItemElement = (
-    <div
+    <button
       onClick={dispatchAddItem}
       className="flex gap-2 p-2 m-2 rounded-md hover:bg-green-500 dark:hover:bg-green-700 "
       style={{ cursor: 'pointer' }}
@@ -55,11 +55,11 @@ export default function CountryInfo({ id }: Country) {
         <BsCartPlusFill />
       </IconContext.Provider>
       <p>Add to Cart</p>
-    </div>
+    </button>
   )
 
   const removeItemElement = (
-    <div
+    <button
       onClick={dispatchRemoveItem}
       className="flex gap-2 p-2 m-2 rounded-md hover:bg-red-500 dark:hover:bg-red-700 "
       style={{ cursor: 'pointer' }}
@@ -73,7 +73,7 @@ export default function CountryInfo({ id }: Country) {
         <MdRemoveShoppingCart />
       </IconContext.Provider>
       <p>Remove from Cart</p>
-    </div>
+    </button>
   )
 
   return (

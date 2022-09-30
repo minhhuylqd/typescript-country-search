@@ -7,6 +7,7 @@ import {
   selectSelectedRegions,
   updateRegionFilter,
 } from '../../redux/slices/filtersSlice'
+import { SelectedRegion } from '../../utilities/types'
 
 const regionOptions = availableRegions.map((region: string) => ({
   name: region,
@@ -19,17 +20,28 @@ export default function Filters() {
   const selectedRegions = useSelector(selectSelectedRegions)
 
   const onSelect = (
-    selectedRegions: any,
-    selectedItem: { name: string; id: string }
+    newSelectedRegions: SelectedRegion[],
+    selectedItem: SelectedRegion
   ) => {
     dispatch(updateRegionFilter(selectedItem.id, 'add'))
   }
 
   const onRemove = (
-    selectedRegions: any,
-    selectedItem: { name: string; id: string }
+    newSelectedRegions: SelectedRegion[],
+    selectedItem: SelectedRegion
   ) => {
-    dispatch(updateRegionFilter(selectedItem.id, 'remove'))
+    if (selectedItem.id) {
+      dispatch(updateRegionFilter(selectedItem.id, 'remove'))
+    } else {
+      const prevSelectedRegionsIds = selectedRegions.map((region) => region.id)
+      const newSelectedRegionsIds = newSelectedRegions.map(
+        (region) => region.id
+      )
+      const removedElement = prevSelectedRegionsIds.filter(
+        (regionId) => newSelectedRegionsIds.indexOf(regionId) === -1
+      )
+      dispatch(updateRegionFilter(removedElement[0], 'remove'))
+    }
   }
 
   return (

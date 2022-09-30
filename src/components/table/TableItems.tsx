@@ -36,7 +36,7 @@ export default function TableItems({ id }: Item) {
   const dispatchRemoveItem = () => dispatch(removeItem(id))
 
   const addItemElement = (
-    <div
+    <button
       onClick={dispatchAddItem}
       className="p-3 hover:bg-green-500 dark:hover:bg-green-700 rounded-md"
       style={{ cursor: 'pointer' }}
@@ -49,10 +49,10 @@ export default function TableItems({ id }: Item) {
       >
         <BsCartPlusFill />
       </IconContext.Provider>
-    </div>
+    </button>
   )
   const removeItemElement = (
-    <div
+    <button
       onClick={dispatchRemoveItem}
       className="p-3 hover:bg-red-500 dark:hover:bg-red-700 rounded-md"
       style={{ cursor: 'pointer' }}
@@ -65,7 +65,7 @@ export default function TableItems({ id }: Item) {
       >
         <MdRemoveShoppingCart />
       </IconContext.Provider>
-    </div>
+    </button>
   )
 
   return (

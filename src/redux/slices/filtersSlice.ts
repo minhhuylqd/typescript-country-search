@@ -9,6 +9,11 @@ export interface FiltersState {
   }
 }
 
+export interface RegionPayload {
+  region: string
+  changeType: string
+}
+
 const initialState: FiltersState = {
   searchQuery: '',
   filterOptions: {
@@ -25,10 +30,7 @@ const filtersSlice = createSlice({
       state.searchQuery = action.payload
     },
     updateRegionFilter: {
-      reducer(
-        state: FiltersState,
-        action: PayloadAction<{ region: string; changeType: string }>
-      ) {
+      reducer(state: FiltersState, action: PayloadAction<RegionPayload>) {
         let { region, changeType } = action.payload
         const { byRegion } = state.filterOptions
         switch (changeType) {
@@ -40,7 +42,7 @@ const filtersSlice = createSlice({
           }
           case 'remove': {
             state.filterOptions.byRegion = byRegion.filter(
-              (existedRegion: string) => existedRegion !== region
+              (existedRegion) => existedRegion !== region
             )
             break
           }

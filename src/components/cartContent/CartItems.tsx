@@ -36,9 +36,9 @@ export default function CartItems({ id }: Item) {
         </div>
       </Link>
       <div>
-        <div
+        <button
           onClick={dispatchRemoveItem}
-          className="inline-block p-4 hover:bg-red-500 dark:hover:bg-red-700 rounded-md"
+          className="p-4 hover:bg-red-500 dark:hover:bg-red-700 rounded-md"
           style={{ cursor: 'pointer' }}
         >
           <IconContext.Provider
@@ -49,7 +49,7 @@ export default function CartItems({ id }: Item) {
           >
             <MdRemoveShoppingCart />
           </IconContext.Provider>
-        </div>
+        </button>
       </div>
     </div>
   )

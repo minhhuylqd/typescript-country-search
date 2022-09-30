@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { IconContext } from 'react-icons'
 import { useDispatch, useSelector } from 'react-redux'
+import { IconContext } from 'react-icons'
 import { AiFillHome } from 'react-icons/ai'
 import { FaShoppingCart } from 'react-icons/fa'
 import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs'
 
 import { RootState } from '../../redux/store'
-import { selectDarkmode } from '../../redux/slices/appearanceSlice'
+import {
+  selectDarkmode,
+  toggleDarkmode,
+} from '../../redux/slices/appearanceSlice'
 
 export default function Navbar() {
   const dispatch = useDispatch()
 
   const isDarkmode = useSelector(selectDarkmode)
 
-  const handleToggleDarkmode = () => {
-    dispatch({ type: 'appearance/toggleDarkmode' })
-  }
+  const handleToggleDarkmode = () => dispatch(toggleDarkmode())
 
   useEffect(() => {
     isDarkmode
@@ -44,7 +45,7 @@ export default function Navbar() {
       </Link>
 
       <div className="flex">
-        <div
+        <button
           className="p-4 hover:bg-gray-400 dark:hover:bg-gray-700 rounded-md"
           onClick={handleToggleDarkmode}
         >
@@ -56,7 +57,7 @@ export default function Navbar() {
           >
             {isDarkmode ? <BsFillSunFill /> : <BsFillMoonFill />}
           </IconContext.Provider>
-        </div>
+        </button>
 
         <Link to="/cart">
           <div className="flex gap-2 items-center p-4 hover:bg-gray-400 dark:hover:bg-gray-700 rounded-md">

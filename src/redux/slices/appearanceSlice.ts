@@ -15,7 +15,7 @@ const appearanceSlice = createSlice({
   name: 'appearance',
   initialState,
   reducers: {
-    toggleDarkmode(state: AppearanceState, action) {
+    toggleDarkmode(state: AppearanceState) {
       state.darkmode = !state.darkmode
     },
   },

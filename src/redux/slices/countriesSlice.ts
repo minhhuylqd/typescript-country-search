@@ -1,23 +1,7 @@
 import { RootState } from './../store'
 import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit'
 
-export type Country = {
-  name: {
-    common: string
-    official: string
-  }
-  cca3: string
-  capital: string[]
-  region: string
-  subregion: string
-  languages: {
-    [language: string]: string
-  }
-  population: number
-  flags: {
-    png: string
-  }
-}
+import { Country } from '../../utilities/types'
 
 export interface CountryState {
   entities: {
@@ -100,10 +84,10 @@ export const selectFilteredCountries = createSelector(
     const { searchQuery, filterOptions } = filtersState
     const { byRegion } = filterOptions
 
-    let filteredCountries = Object.values(countriesState.entities)
+    let filteredCountries: Country[] = Object.values(countriesState.entities)
 
     if (searchQuery !== '') {
-      filteredCountries = filteredCountries.filter((country: Country) => {
+      filteredCountries = filteredCountries.filter((country) => {
         return country.name.official
           .toLowerCase()
           .includes(searchQuery.toLowerCase())
@@ -111,7 +95,7 @@ export const selectFilteredCountries = createSelector(
     }
 
     if (byRegion.length > 0) {
-      filteredCountries = filteredCountries.filter((country: Country) => {
+      filteredCountries = filteredCountries.filter((country) => {
         return byRegion.includes(country.region)
       })
     }
@@ -122,8 +106,7 @@ export const selectFilteredCountries = createSelector(
 
 export const selectFilteredCountryIds = createSelector(
   selectFilteredCountries,
-  (filteredCountries) =>
-    filteredCountries.map((country: Country) => country.cca3)
+  (filteredCountries) => filteredCountries.map((country) => country.cca3)
 )
 
 export type CountryIds = string[]
