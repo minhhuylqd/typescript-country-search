@@ -28,11 +28,11 @@ export default function CountryInfo({ id }: Country) {
   const flag = country.flags.png
   const commonName = country.name.common
   const officialName = country.name.official
-  const capital = country.capital.map((capital) => <span>{capital} </span>)
+  const capital = country.capital.map((capital) => <span key={capital}>{capital} </span>)
   const region = country.region
   const subregion = country.subregion
   const languages = Object.values(country.languages).map((language) => (
-    <li>- {language}</li>
+    <li key={language}>- {language}</li>
   ))
   const population = country.population
 
@@ -95,7 +95,7 @@ export default function CountryInfo({ id }: Country) {
         <p>Subregion: {subregion}</p>
         <label htmlFor="languages-list">Languages: </label>
         <ul id="languages-list">{languages}</ul>
-        <p>Population: {population}</p>
+        <p>Population: {population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</p>
       </div>
     </div>
   )

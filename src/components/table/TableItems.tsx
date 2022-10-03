@@ -75,7 +75,7 @@ export default function TableItems({ id }: Item) {
       </td>
       <td className="py-2 px-4 border-r dark:border-gray-600">{name}</td>
       <td className="py-2 px-4 border-r dark:border-gray-600">{region}</td>
-      <td className="py-2 px-4 border-r dark:border-gray-600">{population}</td>
+      <td className="py-2 px-4 border-r dark:border-gray-600">{population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
       <td className="text-center py-2 px-4 border-r dark:border-gray-600">
         <Link to={`/country/${id}`}>
           <span className="text-sm italic hover:text-sky-400">Read More</span>
