@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Typescript-country-search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project URL: https://countryfinder.jonathando.dev/
 
 ## Available Scripts
 
